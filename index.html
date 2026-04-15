@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation — Eng. Hawi & Eng. Dereje</title>
+    <meta name="description" content="You are warmly invited to celebrate the wedding of Eng. Hawi Teshome & Eng. Dereje Itefa">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Noto+Serif+Ethiopic:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8D48B;
+            --gold-dark: #A07D2E;
+            --cream: #FDF8F0;
+            --cream-dark: #F5EBD9;
+            --brown: #5C3D2E;
+            --brown-light: #8B6548;
+            --brown-dark: #3A2518;
+            --burgundy: #6B2D3E;
+            --sage: #8B9A6B;
+            --white: #FFFFFF;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Montserrat', 'Segoe UI', sans-serif;
+            --font-amharic: 'Noto Serif Ethiopic', serif;
+        }
+
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ethiopic font for Amharic & Oromo where needed */
+        body.lang-am, body.lang-om {
+            --font-body-override: 'Noto Serif Ethiopic', serif;
+        }
+
+        body.lang-am .section-title,
+        body.lang-am .detail-label,
+        body.lang-am .detail-value,
+        body.lang-am .countdown-label,
+        body.lang-am .message-body,
+        body.lang-am .message-signature,
+        body.lang-am .invitation-prefix,
+        body.lang-am .wedding-label,
+        body.lang-am .section-subtitle,
+        body.lang-am .map-link,
+        body.lang-am .map-address {
+            font-family: var(--font-amharic);
+        }
+
+        body.lang-om .section-title,
+        body.lang-om .invitation-prefix,
+        body.lang-om .wedding-label {
+            font-family: var(--font-body);
+        }
+
+        /* ========== LANGUAGE SWITCHER ========== */
+        .lang-switcher {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 2000;
+            display: flex;
+            gap: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(58, 37, 24, 0.15);
+            border: 1px solid var(--gold-light);
+        }
+
+        .lang-btn {
+            background: rgba(253, 248, 240, 0.95);
+            border: none;
+            padding: 8px 14px;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--brown-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:not(:last-child) {
+            border-right: 1px solid var(--gold-light);
+        }
+
+        .lang-btn:hover {
+            background: var(--gold-light);
+            color: var(--brown-dark);
+        }
+
+        .lang-btn.active {
+            background: var(--gold-dark);
+            color: var(--white);
+        }
+
+        /* ========== ETHIOPIAN BORDER PATTERN ========== */
+        .tilet-border {
+            width: 100%;
+            height: 24px;
+            background-image: repeating-linear-gradient(
+                90deg,
+                var(--gold) 0px, var(--gold) 6px,
+                transparent 6px, transparent 10px,
+                var(--burgundy) 10px, var(--burgundy) 16px,
+                transparent 16px, transparent 20px,
+                var(--sage) 20px, var(--sage) 26px,
+                transparent 26px, transparent 30px
+            );
+            opacity: 0.7;
+        }
+
+        .tilet-border-diamond {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .tilet-border-diamond span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            opacity: 0.6;
+        }
+
+        .tilet-border-diamond span:nth-child(odd) {
+            background: var(--burgundy);
+            width: 8px;
+            height: 8px;
+        }
+
+        /* ========== PETAL ANIMATION ========== */
+        .petal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            top: -20px;
+            opacity: 0;
+            animation: petalFall linear infinite;
+        }
+
+        .petal svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(80px) rotate(360deg);
+                top: 100vh;
+            }
+        }
+
+        /* ========== FADE-IN ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(107, 45, 62, 0.06) 0%, transparent 50%),
+                var(--cream);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 15% 15%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 85% 20%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 50% 80%, var(--gold) 0.5px, transparent 0.5px);
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .invitation-prefix {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 12px;
+        }
+
+        .amharic-greeting {
+            font-family: var(--font-amharic);
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+
+        .couple-names {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(2.8rem, 8vw, 5.5rem);
+            line-height: 1.15;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+
+        .couple-names .amp {
+            display: block;
+            font-style: italic;
+            font-size: 0.45em;
+            color: var(--gold);
+            margin: 4px 0;
+        }
+
+        .wedding-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-top: 16px;
+            margin-bottom: 32px;
+        }
+
+        .hero-date {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--brown-light);
+            letter-spacing: 2px;
+        }
+
+        .hero-date-eth {
+            font-family: var(--font-amharic);
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: var(--gold-dark);
+        }
+
+        /* ========== PHOTO SECTION ========== */
+        .photo-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: min(85vw, 420px);
+            aspect-ratio: 3/4;
+            border: 3px solid var(--gold);
+            padding: 10px;
+            background: var(--white);
+            box-shadow: 0 20px 60px rgba(92, 61, 46, 0.12);
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: 16px;
+            border: 1px solid var(--gold-light);
+            pointer-events: none;
+        }
+
+        /* ========== DETAILS SECTION ========== */
+        .details-section {
+            padding: 60px 20px;
+            text-align: center;
+            background:
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 40px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 36px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .detail-card {
+            padding: 28px 20px;
+            background: var(--white);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            position: relative;
+        }
+
+        .detail-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .detail-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .detail-label {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: var(--brown-dark);
+            line-height: 1.5;
+        }
+
+        .detail-value small {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--brown-light);
+            margin-top: 4px;
+            font-weight: 300;
+        }
+
+        /* ========== COUNTDOWN ========== */
+        .countdown-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .countdown-item {
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-top: 4px;
+        }
+
+        /* ========== MESSAGE SECTION ========== */
+        .message-section {
+            padding: 60px 20px;
+            text-align: center;
+            background:
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
+        }
+
+        .message-body {
+            max-width: 560px;
+            margin: 0 auto;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--brown);
+            padding: 0 10px;
+        }
+
+        .message-signature {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-top: 24px;
+            font-weight: 400;
+        }
+
+        /* ========== MAP SECTION ========== */
+        .map-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--gold-dark);
+            padding: 14px 32px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .map-link:hover {
+            background: var(--brown-dark);
+        }
+
+        .map-address {
+            margin-top: 16px;
+            font-family: var(--font-amharic);
+            font-size: 0.95rem;
+            color: var(--brown-light);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: var(--brown-dark);
+            color: var(--cream-dark);
+        }
+
+        .footer-names {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--gold-light);
+            margin-bottom: 8px;
+        }
+
+        .footer-blessing {
+            font-family: var(--font-amharic);
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .footer-date {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: rgba(253, 248, 240, 0.5);
+        }
+
+        /* ========== HABESHA WOVEN PATTERN DIVIDER ========== */
+        .woven-divider {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 20px 0;
+        }
+
+        .woven-divider .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .woven-divider .diamond {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (min-width: 640px) {
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .detail-card:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                max-width: 300px;
+                justify-self: center;
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 80px 40px;
+            }
+
+            .countdown-item {
+                min-width: 100px;
+            }
+
+            .countdown-number {
+                font-size: 3.8rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .lang-switcher {
+                top: 10px;
+                right: 10px;
+            }
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Switcher -->
+    <nav class="lang-switcher" aria-label="Language">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="am">አማ</button>
+        <button class="lang-btn" data-lang="om">OM</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+    </nav>
+
+    <!-- Falling Petals -->
+    <div class="petal-container" id="petalContainer"></div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <p class="invitation-prefix" data-i18n="hosts"></p>
+            <p class="amharic-greeting" style="font-size: 0.85rem; margin-bottom: 8px;" data-i18n="hostsNative"></p>
+            <p class="invitation-prefix" style="margin-bottom: 4px; letter-spacing: 3px;" data-i18n="inviteLine"></p>
+
+            <div class="tilet-border-diamond">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+
+            <h1 class="couple-names" data-i18n-html="coupleNames"></h1>
+
+            <div class="tilet-border-diamond">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+
+            <p class="amharic-greeting" data-i18n="congratsLine"></p>
+            <p class="wedding-label" data-i18n="honourLine"></p>
+            <p class="hero-date" data-i18n="heroDate"></p>
+            <p class="hero-date" style="font-size: 1rem; margin-top: 4px;" data-i18n="heroYear"></p>
+            <p class="hero-date-eth">ሚያዚያ 25, 2018 ዓ.ም.</p>
+        </div>
+    </section>
+
+    <div class="tilet-border"></div>
+
+    <!-- ===== PHOTO ===== -->
+    <section class="photo-section fade-in">
+        <div class="photo-frame">
+            <img src="images/First.jpg" alt="Eng. Hawi Teshome & Eng. Dereje Itefa" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+    </section>
+
+    <!-- ===== WEDDING DETAILS ===== -->
+    <section class="details-section">
+        <div class="fade-in">
+            <h2 class="section-title" data-i18n="detailsTitle"></h2>
+            <p class="section-subtitle" data-i18n="detailsSubtitle"></p>
+        </div>
+
+        <div class="details-grid">
+            <div class="detail-card fade-in">
+                <div class="detail-icon">&#128197;</div>
+                <p class="detail-label" data-i18n="dateLabel"></p>
+                <p class="detail-value" data-i18n-html="dateValue"></p>
+            </div>
+
+            <div class="detail-card fade-in">
+                <div class="detail-icon">&#128336;</div>
+                <p class="detail-label" data-i18n="timeLabel"></p>
+                <p class="detail-value" data-i18n-html="timeValue"></p>
+            </div>
+
+            <div class="detail-card fade-in">
+                <div class="detail-icon">&#9962;</div>
+                <p class="detail-label" data-i18n="locationLabel"></p>
+                <p class="detail-value" data-i18n-html="locationValue"></p>
+            </div>
+
+            <div class="detail-card fade-in">
+                <div class="detail-icon">&#127757;</div>
+                <p class="detail-label" data-i18n="locationLabelAm"></p>
+                <p class="detail-value" style="font-family: var(--font-amharic); font-size: 1.1rem;" data-i18n-html="locationValueAm"></p>
+            </div>
+
+            <div class="detail-card fade-in">
+                <div class="detail-icon">&#128141;</div>
+                <p class="detail-label" data-i18n="dressLabel"></p>
+                <p class="detail-value" data-i18n-html="dressValue"></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="tilet-border"></div>
+
+    <!-- ===== COUNTDOWN ===== -->
+    <section class="countdown-section fade-in">
+        <h2 class="section-title" data-i18n="countdownTitle"></h2>
+        <div class="woven-divider">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+        </div>
+        <div style="height: 24px;"></div>
+
+        <div class="countdown-grid" id="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">--</div>
+                <div class="countdown-label" data-i18n="days"></div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">--</div>
+                <div class="countdown-label" data-i18n="hours"></div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">--</div>
+                <div class="countdown-label" data-i18n="minutes"></div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">--</div>
+                <div class="countdown-label" data-i18n="seconds"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PERSONAL MESSAGE ===== -->
+    <section class="message-section fade-in">
+        <h2 class="section-title" data-i18n="messageTitle"></h2>
+        <div class="woven-divider">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+        </div>
+        <div style="height: 24px;"></div>
+
+        <p class="message-body" data-i18n="messageBody"></p>
+        <p class="message-signature" data-i18n="messageSig"></p>
+    </section>
+
+    <div class="tilet-border"></div>
+
+    <!-- ===== MAP / LOCATION ===== -->
+    <section class="map-section fade-in">
+        <h2 class="section-title" data-i18n="mapTitle"></h2>
+        <p class="section-subtitle" data-i18n="mapSubtitle"></p>
+
+        <a class="map-link"
+           href="https://goo.gl/maps/BCvTaGUJ19kJ48Gs9?g_st=atm"
+           target="_blank"
+           rel="noopener noreferrer"
+           data-i18n="mapButton">
+        </a>
+        <p class="map-address" data-i18n="mapAddress"></p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="tilet-border" style="margin-bottom: 32px; opacity: 0.3;"></div>
+        <p class="footer-names">Eng. Hawi & Eng. Dereje</p>
+        <p class="footer-blessing" data-i18n="footerBlessing"></p>
+        <p class="footer-date" data-i18n="footerDate"></p>
+    </footer>
+
+    <script>
+        /* ========================================
+           CONFIGURATION
+           ======================================== */
+        const WEDDING_DATE = '2026-05-03T12:00:00';
+
+        /* ========================================
+           TRANSLATIONS
+           ======================================== */
+        const T = {
+            en: {
+                hosts: 'Mr. Teshome Nurgi & Teacher Abebech Deneke',
+                hostsNative: 'አቶ ተሾመ ኑርጊ እና መምህርት አበበች ደነቀ',
+                inviteLine: 'Cordially invite you to the wedding of their daughter',
+                coupleNames: 'Eng. Hawi<span class="amp">&</span>Eng. Dereje',
+                congratsLine: 'እንኳን ደስ አላችሁ!',
+                honourLine: 'Request the honour of your presence',
+                heroDate: 'Sunday, the Third of May',
+                heroYear: 'Two Thousand and Twenty-Six',
+                detailsTitle: 'Wedding Details',
+                detailsSubtitle: 'Ceremony & Celebration',
+                dateLabel: 'Date',
+                dateValue: 'May 3, 2026<small>Sunday · ሚያዚያ 25, 2018 ዓ.ም.</small>',
+                timeLabel: 'Time',
+                timeValue: '12:00 PM<small>Ceremony begins promptly</small>',
+                locationLabel: 'Location',
+                locationValue: 'Ginchi Town<small>Melka Irecha Awash Kebele</small><small>In front of Number Seven Road</small>',
+                locationLabelAm: 'አድራሻ',
+                locationValueAm: 'ጊንጪ ከተማ<small style="font-family:var(--font-amharic)">መልካ ኢሬቻ አዋሽ ቀበሌ</small><small style="font-family:var(--font-amharic)">ሰባት ቁጥር መንገድ ፊት ለፊት</small>',
+                dressLabel: 'Dress Code',
+                dressValue: 'Formal / Traditional<small>Habesha kemis welcome</small>',
+                countdownTitle: 'Counting the Days',
+                days: 'Days',
+                hours: 'Hours',
+                minutes: 'Minutes',
+                seconds: 'Seconds',
+                messageTitle: 'A Note From Us',
+                messageBody: 'With hearts full of joy and gratitude, we invite you to share in the celebration of our love. Your presence, prayers, and blessings mean the world to us as we begin this beautiful journey together. We cannot wait to celebrate with each and every one of you.',
+                messageSig: 'With love, Hawi & Dereje',
+                mapTitle: 'Find Your Way',
+                mapSubtitle: 'Venue Location',
+                mapButton: 'Open in Google Maps',
+                mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
+                footerDate: 'May 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
+            },
+            am: {
+                hosts: 'አቶ ተሾመ ኑርጊ እና መምህርት አበበች ደነቀ',
+                hostsNative: 'Mr. Teshome Nurgi & Teacher Abebech Deneke',
+                inviteLine: 'የልጃቸው የሠርግ ስነ-ስርዓት ላይ እንዲገኙ በአክብሮት ይጋብዛሉ',
+                coupleNames: 'ኢንጂነር ሐዊ<span class="amp">&</span>ኢንጂነር ደረጀ',
+                congratsLine: 'እንኳን ደስ አላችሁ!',
+                honourLine: 'በሠርግ ስነ-ስርዓታችን ላይ እንዲገኙ በአክብሮት እንጋብዛለን',
+                heroDate: 'እሁድ፣ ሚያዚያ 25',
+                heroYear: '2018 ዓ.ም.',
+                detailsTitle: 'የሠርግ ዝርዝሮች',
+                detailsSubtitle: 'ስነ-ስርዓት እና ክብረ በዓል',
+                dateLabel: 'ቀን',
+                dateValue: 'ሚያዚያ 25, 2018 ዓ.ም.<small>እሁድ · May 3, 2026</small>',
+                timeLabel: 'ሰዓት',
+                timeValue: 'ከቀኑ 6:00 ሰዓት<small>ስነ-ስርዓቱ በሰዓቱ ይጀምራል</small>',
+                locationLabel: 'ቦታ',
+                locationValue: 'ጊንጪ ከተማ<small>መልካ ኢሬቻ አዋሽ ቀበሌ</small><small>ሰባት ቁጥር መንገድ ፊት ለፊት</small>',
+                locationLabelAm: 'Location',
+                locationValueAm: 'Ginchi Town<small>Melka Irecha Awash Kebele</small><small>In front of Number Seven Road</small>',
+                dressLabel: 'የአለባበስ ስርዓት',
+                dressValue: 'መደበኛ / ባህላዊ<small>የሐበሻ ቀሚስ እንኳን ደህና መጡ</small>',
+                countdownTitle: 'ቀናትን እየቆጠርን',
+                days: 'ቀናት',
+                hours: 'ሰዓቶች',
+                minutes: 'ደቂቃዎች',
+                seconds: 'ሰከንዶች',
+                messageTitle: 'ከእኛ የተላከ መልዕክት',
+                messageBody: 'በደስታና በምስጋና የተሞላ ልባችን፣ የፍቅራችንን ክብረ በዓል እንድታጋሩን እንጋብዛችኋለን። ይህን ቆንጆ ጉዞ በአንድ ላይ ስንጀምር መገኘታችሁ፣ ጸሎታችሁ እና ምርቃታችሁ ለእኛ ትልቅ ዋጋ አለው። ከሁላችሁም ጋር ለማክበር በጉጉት እንጠባበቃለን።',
+                messageSig: 'በፍቅር፣ ሐዊ እና ደረጀ',
+                mapTitle: 'መንገድዎን ያግኙ',
+                mapSubtitle: 'የቦታ አድራሻ',
+                mapButton: 'በGoogle Maps ይክፈቱ',
+                mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
+                footerDate: 'ሚያዚያ 25, 2018 ዓ.ም. · May 3, 2026 · ጊንጪ'
+            },
+            om: {
+                hosts: 'Obbo Tashoomaa Nurgii fi Barsiistuu Abbabach Dannaqaa',
+                hostsNative: 'አቶ ተሾመ ኑርጊ እና መምህርት አበበች ደነቀ',
+                inviteLine: 'Sirna fuudhaa fi heeruma intala isaanii irratti akka argamtan kabajaan isin affeeru',
+                coupleNames: 'Inj. Haawii<span class="amp">&</span>Inj. Darajjee Ittafaa',
+                congratsLine: 'Baga Gammaddan!',
+                honourLine: 'Sirna fuudhaa fi heeruma keenya irratti argamuun keessan kabaja nuuf kenna',
+                heroDate: 'Dilbata, Caamsaa 3',
+                heroYear: 'Bara 2026',
+                detailsTitle: 'Odeeffannoo Sirna Fuudhaa',
+                detailsSubtitle: 'Sirna fi Kabaja',
+                dateLabel: 'Guyyaa',
+                dateValue: 'Caamsaa 3, 2026<small>Dilbata · ሚያዚያ 25, 2018 ዓ.ም.</small>',
+                timeLabel: "Sa'aatii",
+                timeValue: "Sa'aatii 6:00 guyyaa<small>Sirnichi sa'aatii sirrii irratti eegala</small>",
+                locationLabel: 'Bakka',
+                locationValue: "Magaalaa Giincii<small>Malkaa Irreechaa Awaash Qabeelee</small><small>Karaa Lakkoofsa Torba fuuldura</small>",
+                locationLabelAm: 'አድራሻ',
+                locationValueAm: 'ጊንጪ ከተማ<small style="font-family:var(--font-amharic)">መልካ ኢሬቻ አዋሽ ቀበሌ</small><small style="font-family:var(--font-amharic)">ሰባት ቁጥር መንገድ ፊት ለፊት</small>',
+                dressLabel: 'Akkaataa Uffannaa',
+                dressValue: "Idilee / Aadaa<small>Uffata aadaa Habashaa baga nagaan dhuftan</small>",
+                countdownTitle: "Guyyoota Lakkaa'aa Jirra",
+                days: 'Guyyaa',
+                hours: "Sa'aatii",
+                minutes: 'Daqiiqaa',
+                seconds: 'Sekoondii',
+                messageTitle: 'Ergaa Keenya',
+                messageBody: "Gammachuu fi galata guutuun, kabaja jaalalaa keenyaa akka nuuf qooddan isin affeerra. Imala bareedduu kana waliin yeroo jalqabnu, argamuun keessan, kadhannaa fi eebba keessan nuuf baay'ee gatii guddaa qaba. Isin hundaa waliin kabajuuf hawwiin eegna.",
+                messageSig: 'Jaalallaan, Haawii fi Darajjee Ittafaa',
+                mapTitle: 'Karaa Keessan Argadhaa',
+                mapSubtitle: 'Bakka Sirna',
+                mapButton: 'Google Maps irratti banaa',
+                mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                footerBlessing: 'Jaalallaan wal argine, jaalallaan waliin jiraanna',
+                footerDate: 'Caamsaa 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Giincii'
+            },
+            fr: {
+                hosts: 'M. Teshome Nurgi & Enseignante Abebech Deneke',
+                hostsNative: 'አቶ ተሾመ ኑርጊ እና መምህርት አበበች ደነቀ',
+                inviteLine: 'Ont le plaisir de vous inviter au mariage de leur fille',
+                coupleNames: 'Ing. Hawi<span class="amp">&</span>Ing. Dereje',
+                congratsLine: 'Félicitations aux mariés!',
+                honourLine: "Nous vous prions de nous honorer de votre présence",
+                heroDate: 'Dimanche, le trois mai',
+                heroYear: 'Deux mille vingt-six',
+                detailsTitle: 'Détails du Mariage',
+                detailsSubtitle: 'Cérémonie & Célébration',
+                dateLabel: 'Date',
+                dateValue: '3 mai 2026<small>Dimanche · ሚያዚያ 25, 2018 ዓ.ም.</small>',
+                timeLabel: 'Heure',
+                timeValue: '12h00<small>La cérémonie commence à l\'heure</small>',
+                locationLabel: 'Lieu',
+                locationValue: 'Ville de Ginchi<small>Melka Irecha Awash Kebele</small><small>En face de la route numéro sept</small>',
+                locationLabelAm: 'አድራሻ',
+                locationValueAm: 'ጊንጪ ከተማ<small style="font-family:var(--font-amharic)">መልካ ኢሬቻ አዋሽ ቀበሌ</small><small style="font-family:var(--font-amharic)">ሰባት ቁጥር መንገድ ፊት ለፊት</small>',
+                dressLabel: 'Code Vestimentaire',
+                dressValue: 'Formel / Traditionnel<small>Tenue traditionnelle Habesha bienvenue</small>',
+                countdownTitle: 'Compte à Rebours',
+                days: 'Jours',
+                hours: 'Heures',
+                minutes: 'Minutes',
+                seconds: 'Secondes',
+                messageTitle: 'Un Mot de Notre Part',
+                messageBody: 'Le cœur rempli de joie et de gratitude, nous vous invitons à partager la célébration de notre amour. Votre présence, vos prières et vos bénédictions comptent énormément pour nous alors que nous commençons ce beau voyage ensemble. Nous avons hâte de célébrer avec chacun d\'entre vous.',
+                messageSig: 'Avec amour, Hawi & Dereje',
+                mapTitle: 'Trouvez Votre Chemin',
+                mapSubtitle: 'Lieu de la Cérémonie',
+                mapButton: 'Ouvrir dans Google Maps',
+                mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                footerBlessing: 'Unis par l\'amour, nous vivrons dans l\'amour',
+                footerDate: '3 mai 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
+            }
+        };
+
+        /* ========== i18n ENGINE ========== */
+        let currentLang = localStorage.getItem('weddingLang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('weddingLang', lang);
+
+            // Update body class for font overrides
+            document.body.className = document.body.className.replace(/lang-\w+/g, '');
+            document.body.classList.add('lang-' + lang);
+
+            // Update html lang attribute
+            const langMap = { en: 'en', am: 'am', om: 'om', fr: 'fr' };
+            document.documentElement.lang = langMap[lang];
+
+            // Update text content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (T[lang] && T[lang][key] !== undefined) {
+                    el.textContent = T[lang][key];
+                }
+            });
+
+            // Update HTML content (for elements with <small> tags etc.)
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                if (T[lang] && T[lang][key] !== undefined) {
+                    el.innerHTML = T[lang][key];
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        // Attach click handlers
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        // Initialize
+        setLanguage(currentLang);
+
+        /* ========== COUNTDOWN TIMER ========== */
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const target = new Date(WEDDING_DATE).getTime();
+            const diff = target - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        /* ========== SCROLL FADE-IN ========== */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        /* ========== FALLING PETALS ========== */
+        function createPetal() {
+            const container = document.getElementById('petalContainer');
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+
+            const colors = ['#C9A84C', '#E8D48B', '#6B2D3E', '#8B6548'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const size = 8 + Math.random() * 12;
+
+            petal.innerHTML = `<svg viewBox="0 0 20 20" width="${size}" height="${size}">
+                <ellipse cx="10" cy="10" rx="5" ry="9" fill="${color}" opacity="0.6"
+                         transform="rotate(${Math.random() * 360} 10 10)"/>
+            </svg>`;
+
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (6 + Math.random() * 8) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+
+            container.appendChild(petal);
+
+            setTimeout(() => petal.remove(), 16000);
+        }
+
+        setInterval(createPetal, 1800);
+
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createPetal, i * 400);
+        }
+    </script>
+</body>
+</html>
