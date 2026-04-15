@@ -62,7 +62,13 @@
         body.lang-am .wedding-label,
         body.lang-am .section-subtitle,
         body.lang-am .map-link,
-        body.lang-am .map-address {
+        body.lang-am .map-address,
+        body.lang-am .contact-name,
+        body.lang-am .wish-input,
+        body.lang-am .wish-submit,
+        body.lang-am .wish-card-name,
+        body.lang-am .wish-card-message,
+        body.lang-am .wish-status {
             font-family: var(--font-amharic);
         }
 
@@ -534,6 +540,190 @@
             color: var(--brown-light);
         }
 
+        /* ========== CONTACT SECTION ========== */
+        .contact-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-list {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--white);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            padding: 18px 20px;
+            text-decoration: none;
+            color: var(--brown-dark);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .contact-name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--brown-dark);
+        }
+
+        .contact-number {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        /* ========== WISHES SECTION ========== */
+        .wishes-section {
+            padding: 60px 20px;
+            text-align: center;
+            background:
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
+        }
+
+        .wish-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wish-input {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--brown-dark);
+            background: var(--white);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .wish-input:focus {
+            border-color: var(--gold);
+        }
+
+        .wish-input::placeholder {
+            color: var(--brown-light);
+            opacity: 0.6;
+        }
+
+        .wish-textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.5;
+        }
+
+        .wish-submit {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--gold-dark);
+            padding: 14px 32px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .wish-submit:hover {
+            background: var(--brown-dark);
+        }
+
+        .wish-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .wish-status {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--gold-dark);
+            min-height: 20px;
+        }
+
+        .wish-status.error {
+            color: var(--burgundy);
+        }
+
+        .wishes-list {
+            max-width: 500px;
+            margin: 32px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .wish-card {
+            background: var(--white);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            padding: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        .wish-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .wish-card-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        .wish-card-message {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--brown);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .wish-card-time {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            color: var(--brown-light);
+            margin-top: 8px;
+        }
+
+        .wishes-empty {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--brown-light);
+            margin-top: 24px;
+        }
+
         /* ========== FOOTER ========== */
         .footer {
             padding: 40px 20px;
@@ -795,6 +985,57 @@
         </a>
     </section>
 
+    <div class="tilet-border"></div>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact-section fade-in">
+        <h2 class="section-title" data-i18n="contactTitle"></h2>
+        <p class="section-subtitle" data-i18n="contactSubtitle"></p>
+
+        <div class="contact-list">
+            <!-- ✏️ EDIT PHONE NUMBERS — Replace +251 9XX XXX XXX with real numbers -->
+            <a href="tel:+251911000000" class="contact-card">
+                <span class="contact-icon">&#128222;</span>
+                <span class="contact-name" data-i18n="contactName1"></span>
+                <span class="contact-number">+251 911 000 000</span>
+            </a>
+            <a href="tel:+251922000000" class="contact-card">
+                <span class="contact-icon">&#128222;</span>
+                <span class="contact-name" data-i18n="contactName2"></span>
+                <span class="contact-number">+251 922 000 000</span>
+            </a>
+            <a href="tel:+251933000000" class="contact-card">
+                <span class="contact-icon">&#128222;</span>
+                <span class="contact-name" data-i18n="contactName3"></span>
+                <span class="contact-number">+251 933 000 000</span>
+            </a>
+            <!-- ✏️ END PHONE NUMBERS -->
+        </div>
+    </section>
+
+    <div class="tilet-border"></div>
+
+    <!-- ===== GUEST WISHES ===== -->
+    <section class="wishes-section fade-in">
+        <h2 class="section-title" data-i18n="wishesTitle"></h2>
+        <p class="section-subtitle" data-i18n="wishesSubtitle"></p>
+
+        <form id="wishForm" class="wish-form">
+            <input type="text" id="wishName" maxlength="50"
+                   class="wish-input" data-i18n-placeholder="wishNamePlaceholder" required>
+            <textarea id="wishMessage" maxlength="280" rows="3"
+                      class="wish-input wish-textarea"
+                      data-i18n-placeholder="wishMessagePlaceholder" required></textarea>
+            <button type="submit" class="wish-submit" data-i18n="wishSubmit"></button>
+            <p class="wish-status" id="wishStatus"></p>
+        </form>
+
+        <div id="wishesList" class="wishes-list"></div>
+        <p class="wishes-empty" id="wishesEmpty" data-i18n="wishesEmpty"></p>
+    </section>
+
+    <div class="tilet-border"></div>
+
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="tilet-border" style="margin-bottom: 32px; opacity: 0.3;"></div>
@@ -803,11 +1044,25 @@
         <p class="footer-date" data-i18n="footerDate"></p>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
     <script>
         /* ========================================
            CONFIGURATION
            ======================================== */
         const WEDDING_DATE = '2026-05-03T12:00:00';
+
+        /* ========== FIREBASE ========== */
+        firebase.initializeApp({
+            apiKey: "AIzaSyCmj72lIqLh2-ICw5Da16HB8jca_KXxza4",
+            authDomain: "dereje-hawi-wedding.firebaseapp.com",
+            projectId: "dereje-hawi-wedding",
+            storageBucket: "dereje-hawi-wedding.firebasestorage.app",
+            messagingSenderId: "524185510936",
+            appId: "1:524185510936:web:9cbf45c67c7478025ecf6d"
+        });
+        const db = firebase.firestore();
 
         /* ========================================
            TRANSLATIONS
@@ -847,6 +1102,20 @@
                 mapHint: 'This will take you directly to our home where the ceremony and celebration will take place.',
                 mapButton: 'Get Directions to Our Home',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                contactTitle: 'Contact Us',
+                contactSubtitle: 'For Any Questions',
+                contactName1: 'Groom: Eng. Dereje',
+                contactName2: 'Bride: Eng. Hawi',
+                contactName3: 'Family: Mr. Teshome',
+                wishesTitle: 'Guest Wishes',
+                wishesSubtitle: 'Leave Your Blessing',
+                wishNamePlaceholder: 'Your name',
+                wishMessagePlaceholder: 'Write your wishes for the couple...',
+                wishSubmit: 'Send Wishes',
+                wishSending: 'Sending...',
+                wishSuccess: 'Thank you for your blessing!',
+                wishError: 'Something went wrong. Please try again.',
+                wishesEmpty: 'Be the first to leave a wish!',
                 footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
                 footerDate: 'May 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
             },
@@ -884,6 +1153,20 @@
                 mapHint: 'ይህ ቀጥታ ወደ ስነ-ስርዓቱና ክብረ በዓሉ ወደሚካሄድበት ቤታችን ይወስድዎታል።',
                 mapButton: 'ወደ ቤታችን አቅጣጫ ያግኙ',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                contactTitle: 'ያግኙን',
+                contactSubtitle: 'ለማንኛውም ጥያቄ',
+                contactName1: 'ሙሽራ: ኢንጂነር ደረጀ',
+                contactName2: 'ሙሽሪት: ኢንጂነር ሐዊ',
+                contactName3: 'ቤተሰብ: አቶ ተሾመ',
+                wishesTitle: 'የእንግዶች ምኞቶች',
+                wishesSubtitle: 'ምርቃትዎን ይተዉ',
+                wishNamePlaceholder: 'ስምዎ',
+                wishMessagePlaceholder: 'ለጥንዶቹ ምኞትዎን ይፃፉ...',
+                wishSubmit: 'ምኞት ይላኩ',
+                wishSending: 'በመላክ ላይ...',
+                wishSuccess: 'ለምርቃትዎ እናመሰግናለን!',
+                wishError: 'ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።',
+                wishesEmpty: 'የመጀመሪያው ምኞት ይላኩ!',
                 footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
                 footerDate: 'ሚያዚያ 25, 2018 ዓ.ም. · May 3, 2026 · ጊንጪ'
             },
@@ -921,6 +1204,20 @@
                 mapHint: 'Kun kallattiin gara mana keenyaa bakka sirnii fi kabajni itti raawwatamutti isin geessa.',
                 mapButton: 'Gara Mana Keenyaa Karaa Argadhaa',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                contactTitle: 'Nu Quunnamaa',
+                contactSubtitle: 'Gaaffii Kamiyyuuf',
+                contactName1: 'Dhiirsa: Inj. Darajjee',
+                contactName2: 'Misirrittii: Inj. Haawii',
+                contactName3: 'Maatii: Obbo Tashoomaa',
+                wishesTitle: 'Hawwii Keessummoota',
+                wishesSubtitle: 'Eebba Keessan Kaa\'aa',
+                wishNamePlaceholder: 'Maqaa keessan',
+                wishMessagePlaceholder: 'Hawwii keessan lamaan isaaniif barreessaa...',
+                wishSubmit: 'Hawwii Ergaa',
+                wishSending: 'Ergaa jira...',
+                wishSuccess: 'Eebba keessaniif galatoomaa!',
+                wishError: 'Rakkoon uumame. Irra deebi\'aatii yaaladhaa.',
+                wishesEmpty: 'Kan jalqabaa hawwii kaa\'aa!',
                 footerBlessing: 'Jaalallaan wal argine, jaalallaan waliin jiraanna',
                 footerDate: 'Caamsaa 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Giincii'
             },
@@ -958,6 +1255,20 @@
                 mapHint: 'Ceci vous guidera directement vers notre maison où la cérémonie et la célébration auront lieu.',
                 mapButton: 'Itinéraire vers Notre Maison',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
+                contactTitle: 'Contactez-Nous',
+                contactSubtitle: 'Pour Toute Question',
+                contactName1: 'Marié: Ing. Dereje',
+                contactName2: 'Mariée: Ing. Hawi',
+                contactName3: 'Famille: M. Teshome',
+                wishesTitle: 'Voeux des Invités',
+                wishesSubtitle: 'Laissez Votre Bénédiction',
+                wishNamePlaceholder: 'Votre nom',
+                wishMessagePlaceholder: 'Écrivez vos voeux pour les mariés...',
+                wishSubmit: 'Envoyer les Voeux',
+                wishSending: 'Envoi en cours...',
+                wishSuccess: 'Merci pour votre bénédiction!',
+                wishError: 'Une erreur est survenue. Veuillez réessayer.',
+                wishesEmpty: 'Soyez le premier à laisser un voeu!',
                 footerBlessing: 'Unis par l\'amour, nous vivrons dans l\'amour',
                 footerDate: '3 mai 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
             }
@@ -991,6 +1302,14 @@
                 const key = el.getAttribute('data-i18n-html');
                 if (T[lang] && T[lang][key] !== undefined) {
                     el.innerHTML = T[lang][key];
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (T[lang] && T[lang][key] !== undefined) {
+                    el.placeholder = T[lang][key];
                 }
             });
 
@@ -1078,6 +1397,87 @@
 
         for (let i = 0; i < 5; i++) {
             setTimeout(createPetal, i * 400);
+        }
+
+        /* ========== GUEST WISHES (FIRESTORE) ========== */
+        const wishForm = document.getElementById('wishForm');
+        const wishStatus = document.getElementById('wishStatus');
+        const wishesList = document.getElementById('wishesList');
+        const wishesEmpty = document.getElementById('wishesEmpty');
+
+        // Submit wish
+        wishForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nameEl = document.getElementById('wishName');
+            const msgEl = document.getElementById('wishMessage');
+            const btn = wishForm.querySelector('.wish-submit');
+            const name = nameEl.value.trim();
+            const message = msgEl.value.trim();
+
+            if (!name || !message) return;
+
+            btn.disabled = true;
+            btn.textContent = T[currentLang].wishSending;
+            wishStatus.textContent = '';
+            wishStatus.className = 'wish-status';
+
+            try {
+                await db.collection('wishes').add({
+                    name: name,
+                    message: message,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                nameEl.value = '';
+                msgEl.value = '';
+                wishStatus.textContent = T[currentLang].wishSuccess;
+            } catch (err) {
+                wishStatus.textContent = T[currentLang].wishError;
+                wishStatus.className = 'wish-status error';
+            }
+
+            btn.disabled = false;
+            btn.textContent = T[currentLang].wishSubmit;
+        });
+
+        // Real-time listener
+        db.collection('wishes')
+          .orderBy('createdAt', 'desc')
+          .limit(10)
+          .onSnapshot((snapshot) => {
+              wishesList.innerHTML = '';
+
+              if (snapshot.empty) {
+                  wishesEmpty.style.display = 'block';
+                  return;
+              }
+
+              wishesEmpty.style.display = 'none';
+
+              snapshot.forEach((doc) => {
+                  const data = doc.data();
+                  const card = document.createElement('div');
+                  card.className = 'wish-card';
+
+                  const ts = data.createdAt?.toDate();
+                  const timeStr = ts ? ts.toLocaleDateString('en-US', {
+                      month: 'short', day: 'numeric', year: 'numeric'
+                  }) : '';
+
+                  card.innerHTML = `
+                      <div class="wish-card-name">${escapeHtml(data.name)}</div>
+                      <div class="wish-card-message">${escapeHtml(data.message)}</div>
+                      ${timeStr ? `<div class="wish-card-time">${timeStr}</div>` : ''}
+                  `;
+                  wishesList.appendChild(card);
+              });
+          }, (err) => {
+              console.error('Firestore listener error:', err);
+          });
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
         }
     </script>
 </body>
