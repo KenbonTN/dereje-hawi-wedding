@@ -486,6 +486,28 @@
             text-align: center;
         }
 
+        .map-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid var(--gold-light);
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 320px;
+            border: 0;
+        }
+
+        .map-hint {
+            max-width: 500px;
+            margin: 16px auto 0;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--brown-light);
+            line-height: 1.5;
+        }
+
         .map-link {
             display: inline-block;
             margin-top: 20px;
@@ -753,13 +775,24 @@
         <h2 class="section-title" data-i18n="mapTitle"></h2>
         <p class="section-subtitle" data-i18n="mapSubtitle"></p>
 
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15762.8!2d38.1344!3d8.9564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b1a0e1e1e1e1f%3A0x1234567890abcdef!2sGinchi!5e0!3m2!1sen!2set!4v1700000000000!5m2!1sen!2set"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <p class="map-hint" data-i18n="mapHint"></p>
+        <p class="map-address" data-i18n="mapAddress"></p>
+
         <a class="map-link"
            href="https://goo.gl/maps/BCvTaGUJ19kJ48Gs9?g_st=atm"
            target="_blank"
            rel="noopener noreferrer"
            data-i18n="mapButton">
         </a>
-        <p class="map-address" data-i18n="mapAddress"></p>
     </section>
 
     <!-- ===== FOOTER ===== -->
@@ -811,7 +844,8 @@
                 messageSig: 'With love, Dereje & Hawi',
                 mapTitle: 'Find Your Way',
                 mapSubtitle: 'Venue Location',
-                mapButton: 'Open in Google Maps',
+                mapHint: 'This will take you directly to our home where the ceremony and celebration will take place.',
+                mapButton: 'Get Directions to Our Home',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
                 footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
                 footerDate: 'May 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
@@ -847,7 +881,8 @@
                 messageSig: 'በፍቅር፣ ደረጀ እና ሐዊ',
                 mapTitle: 'መንገድዎን ያግኙ',
                 mapSubtitle: 'የቦታ አድራሻ',
-                mapButton: 'በGoogle Maps ይክፈቱ',
+                mapHint: 'ይህ ቀጥታ ወደ ስነ-ስርዓቱና ክብረ በዓሉ ወደሚካሄድበት ቤታችን ይወስድዎታል።',
+                mapButton: 'ወደ ቤታችን አቅጣጫ ያግኙ',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
                 footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
                 footerDate: 'ሚያዚያ 25, 2018 ዓ.ም. · May 3, 2026 · ጊንጪ'
@@ -883,7 +918,8 @@
                 messageSig: 'Jaalallaan, Darajjee Ittafaa fi Haawii',
                 mapTitle: 'Karaa Keessan Argadhaa',
                 mapSubtitle: 'Bakka Sirna',
-                mapButton: 'Google Maps irratti banaa',
+                mapHint: 'Kun kallattiin gara mana keenyaa bakka sirnii fi kabajni itti raawwatamutti isin geessa.',
+                mapButton: 'Gara Mana Keenyaa Karaa Argadhaa',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
                 footerBlessing: 'Jaalallaan wal argine, jaalallaan waliin jiraanna',
                 footerDate: 'Caamsaa 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Giincii'
@@ -919,7 +955,8 @@
                 messageSig: 'Avec amour, Dereje & Hawi',
                 mapTitle: 'Trouvez Votre Chemin',
                 mapSubtitle: 'Lieu de la Cérémonie',
-                mapButton: 'Ouvrir dans Google Maps',
+                mapHint: 'Ceci vous guidera directement vers notre maison où la cérémonie et la célébration auront lieu.',
+                mapButton: 'Itinéraire vers Notre Maison',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
                 footerBlessing: 'Unis par l\'amour, nous vivrons dans l\'amour',
                 footerDate: '3 mai 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
