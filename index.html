@@ -63,7 +63,6 @@
         body.lang-am .section-subtitle,
         body.lang-am .map-link,
         body.lang-am .map-address,
-        body.lang-am .contact-name,
         body.lang-am .wish-input,
         body.lang-am .wish-submit,
         body.lang-am .wish-card-name,
@@ -540,55 +539,25 @@
             color: var(--brown-light);
         }
 
-        /* ========== CONTACT SECTION ========== */
-        .contact-section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .contact-list {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .contact-card {
-            display: flex;
+        /* ========== MAP PHONE ========== */
+        .map-phone {
+            display: inline-flex;
             align-items: center;
-            gap: 16px;
-            background: var(--white);
-            border: 1px solid rgba(201, 168, 76, 0.25);
-            padding: 18px 20px;
-            text-decoration: none;
+            gap: 8px;
+            margin-top: 16px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
             color: var(--brown-dark);
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
             transition: all 0.3s ease;
         }
 
-        .contact-card:hover {
+        .map-phone:hover {
             border-color: var(--gold);
-            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.15);
-        }
-
-        .contact-icon {
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .contact-name {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            font-weight: 400;
-            color: var(--brown-dark);
-        }
-
-        .contact-number {
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            color: var(--gold-dark);
-            margin-left: auto;
-            font-weight: 500;
+            background: var(--white);
         }
 
         /* ========== WISHES SECTION ========== */
@@ -983,33 +952,12 @@
            rel="noopener noreferrer"
            data-i18n="mapButton">
         </a>
-    </section>
 
-    <div class="tilet-border"></div>
-
-    <!-- ===== CONTACT ===== -->
-    <section class="contact-section fade-in">
-        <h2 class="section-title" data-i18n="contactTitle"></h2>
-        <p class="section-subtitle" data-i18n="contactSubtitle"></p>
-
-        <div class="contact-list">
-            <!-- ✏️ EDIT PHONE NUMBERS — Replace +251 9XX XXX XXX with real numbers -->
-            <a href="tel:+251911000000" class="contact-card">
-                <span class="contact-icon">&#128222;</span>
-                <span class="contact-name" data-i18n="contactName1"></span>
-                <span class="contact-number">+251 911 000 000</span>
+        <div style="margin-top: 24px;">
+            <p style="font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px;" data-i18n="mapCallText"></p>
+            <a href="tel:+251933188003" class="map-phone">
+                &#128222; 0933 188 003
             </a>
-            <a href="tel:+251922000000" class="contact-card">
-                <span class="contact-icon">&#128222;</span>
-                <span class="contact-name" data-i18n="contactName2"></span>
-                <span class="contact-number">+251 922 000 000</span>
-            </a>
-            <a href="tel:+251933000000" class="contact-card">
-                <span class="contact-icon">&#128222;</span>
-                <span class="contact-name" data-i18n="contactName3"></span>
-                <span class="contact-number">+251 933 000 000</span>
-            </a>
-            <!-- ✏️ END PHONE NUMBERS -->
         </div>
     </section>
 
@@ -1102,11 +1050,7 @@
                 mapHint: 'This will take you directly to our home where the ceremony and celebration will take place.',
                 mapButton: 'Get Directions to Our Home',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
-                contactTitle: 'Contact Us',
-                contactSubtitle: 'For Any Questions',
-                contactName1: 'Groom: Eng. Dereje',
-                contactName2: 'Bride: Eng. Hawi',
-                contactName3: 'Family: Mr. Teshome',
+                mapCallText: 'Need help finding us? Call us',
                 wishesTitle: 'Guest Wishes',
                 wishesSubtitle: 'Leave Your Blessing',
                 wishNamePlaceholder: 'Your name',
@@ -1153,11 +1097,7 @@
                 mapHint: 'ይህ ቀጥታ ወደ ስነ-ስርዓቱና ክብረ በዓሉ ወደሚካሄድበት ቤታችን ይወስድዎታል።',
                 mapButton: 'ወደ ቤታችን አቅጣጫ ያግኙ',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
-                contactTitle: 'ያግኙን',
-                contactSubtitle: 'ለማንኛውም ጥያቄ',
-                contactName1: 'ሙሽራ: ኢንጂነር ደረጀ',
-                contactName2: 'ሙሽሪት: ኢንጂነር ሐዊ',
-                contactName3: 'ቤተሰብ: አቶ ተሾመ',
+                mapCallText: 'ቦታውን ለማግኘት ይደውሉልን',
                 wishesTitle: 'የእንግዶች ምኞቶች',
                 wishesSubtitle: 'ምርቃትዎን ይተዉ',
                 wishNamePlaceholder: 'ስምዎ',
@@ -1204,11 +1144,7 @@
                 mapHint: 'Kun kallattiin gara mana keenyaa bakka sirnii fi kabajni itti raawwatamutti isin geessa.',
                 mapButton: 'Gara Mana Keenyaa Karaa Argadhaa',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
-                contactTitle: 'Nu Quunnamaa',
-                contactSubtitle: 'Gaaffii Kamiyyuuf',
-                contactName1: 'Dhiirsa: Inj. Darajjee',
-                contactName2: 'Misirrittii: Inj. Haawii',
-                contactName3: 'Maatii: Obbo Tashoomaa',
+                mapCallText: 'Bakka argachuuf rakkattan? Nu bilbilaa',
                 wishesTitle: 'Hawwii Keessummoota',
                 wishesSubtitle: 'Eebba Keessan Kaa\'aa',
                 wishNamePlaceholder: 'Maqaa keessan',
@@ -1255,11 +1191,7 @@
                 mapHint: 'Ceci vous guidera directement vers notre maison où la cérémonie et la célébration auront lieu.',
                 mapButton: 'Itinéraire vers Notre Maison',
                 mapAddress: 'ጊንጪ ከተማ መልካ ኢሬቻ አዋሽ ቀበሌ፣ ሰባት ቁጥር መንገድ ፊት ለፊት',
-                contactTitle: 'Contactez-Nous',
-                contactSubtitle: 'Pour Toute Question',
-                contactName1: 'Marié: Ing. Dereje',
-                contactName2: 'Mariée: Ing. Hawi',
-                contactName3: 'Famille: M. Teshome',
+                mapCallText: 'Besoin d\'aide pour nous trouver? Appelez-nous',
                 wishesTitle: 'Voeux des Invités',
                 wishesSubtitle: 'Laissez Votre Bénédiction',
                 wishNamePlaceholder: 'Votre nom',
@@ -1399,13 +1331,13 @@
             setTimeout(createPetal, i * 400);
         }
 
-        /* ========== GUEST WISHES (FIRESTORE) ========== */
+        /* ========== GUEST WISHES ========== */
         const wishForm = document.getElementById('wishForm');
         const wishStatus = document.getElementById('wishStatus');
         const wishesList = document.getElementById('wishesList');
         const wishesEmpty = document.getElementById('wishesEmpty');
 
-        // Submit wish
+        // Submit wish — saves to Firestore (display on page) AND emails via FormSubmit
         wishForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const nameEl = document.getElementById('wishName');
@@ -1421,16 +1353,42 @@
             wishStatus.textContent = '';
             wishStatus.className = 'wish-status';
 
+            let success = false;
+
+            // 1. Send email via FormSubmit.co
+            try {
+                await fetch('https://formsubmit.co/ajax/kenbonnurgi@gmail.com', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: 'New Wedding Wish from ' + name,
+                        name: name,
+                        message: message,
+                        _template: 'table'
+                    })
+                });
+                success = true;
+            } catch (err) {
+                console.error('Email send error:', err);
+            }
+
+            // 2. Also save to Firestore (for displaying on page)
             try {
                 await db.collection('wishes').add({
                     name: name,
                     message: message,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
+                success = true;
+            } catch (err) {
+                console.error('Firestore error:', err);
+            }
+
+            if (success) {
                 nameEl.value = '';
                 msgEl.value = '';
                 wishStatus.textContent = T[currentLang].wishSuccess;
-            } catch (err) {
+            } else {
                 wishStatus.textContent = T[currentLang].wishError;
                 wishStatus.className = 'wish-status error';
             }
@@ -1439,40 +1397,44 @@
             btn.textContent = T[currentLang].wishSubmit;
         });
 
-        // Real-time listener
-        db.collection('wishes')
-          .orderBy('createdAt', 'desc')
-          .limit(10)
-          .onSnapshot((snapshot) => {
-              wishesList.innerHTML = '';
+        // Real-time listener for displaying wishes
+        try {
+            db.collection('wishes')
+              .orderBy('createdAt', 'desc')
+              .limit(10)
+              .onSnapshot((snapshot) => {
+                  wishesList.innerHTML = '';
 
-              if (snapshot.empty) {
-                  wishesEmpty.style.display = 'block';
-                  return;
-              }
+                  if (snapshot.empty) {
+                      wishesEmpty.style.display = 'block';
+                      return;
+                  }
 
-              wishesEmpty.style.display = 'none';
+                  wishesEmpty.style.display = 'none';
 
-              snapshot.forEach((doc) => {
-                  const data = doc.data();
-                  const card = document.createElement('div');
-                  card.className = 'wish-card';
+                  snapshot.forEach((doc) => {
+                      const data = doc.data();
+                      const card = document.createElement('div');
+                      card.className = 'wish-card';
 
-                  const ts = data.createdAt?.toDate();
-                  const timeStr = ts ? ts.toLocaleDateString('en-US', {
-                      month: 'short', day: 'numeric', year: 'numeric'
-                  }) : '';
+                      const ts = data.createdAt?.toDate();
+                      const timeStr = ts ? ts.toLocaleDateString('en-US', {
+                          month: 'short', day: 'numeric', year: 'numeric'
+                      }) : '';
 
-                  card.innerHTML = `
-                      <div class="wish-card-name">${escapeHtml(data.name)}</div>
-                      <div class="wish-card-message">${escapeHtml(data.message)}</div>
-                      ${timeStr ? `<div class="wish-card-time">${timeStr}</div>` : ''}
-                  `;
-                  wishesList.appendChild(card);
+                      card.innerHTML = `
+                          <div class="wish-card-name">${escapeHtml(data.name)}</div>
+                          <div class="wish-card-message">${escapeHtml(data.message)}</div>
+                          ${timeStr ? `<div class="wish-card-time">${timeStr}</div>` : ''}
+                      `;
+                      wishesList.appendChild(card);
+                  });
+              }, (err) => {
+                  console.error('Firestore listener error:', err);
               });
-          }, (err) => {
-              console.error('Firestore listener error:', err);
-          });
+        } catch (err) {
+            console.error('Firestore init error:', err);
+        }
 
         function escapeHtml(str) {
             const div = document.createElement('div');
