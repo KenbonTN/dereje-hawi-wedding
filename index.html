@@ -310,31 +310,7 @@
             color: var(--gold-dark);
         }
 
-        /* ========== PHOTO SECTION ========== */
-        .photo-section {
-            padding: 60px 20px;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .photo-frame {
-            position: relative;
-            width: min(85vw, 420px);
-            aspect-ratio: 3/4;
-            border: 3px solid var(--gold);
-            padding: 10px;
-            background: var(--white);
-            box-shadow: 0 20px 60px rgba(92, 61, 46, 0.12);
-        }
-
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            inset: 16px;
-            border: 1px solid var(--gold-light);
-            pointer-events: none;
-        }
+        /* photo-section styles replaced by album-section */
 
         /* ========== DETAILS SECTION ========== */
         .details-section {
@@ -625,17 +601,6 @@
             cursor: not-allowed;
         }
 
-        .wish-status {
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            color: var(--gold-dark);
-            min-height: 20px;
-        }
-
-        .wish-status.error {
-            color: var(--burgundy);
-        }
-
         .wishes-list {
             max-width: 500px;
             margin: 32px auto 0;
@@ -691,6 +656,251 @@
             font-style: italic;
             color: var(--brown-light);
             margin-top: 24px;
+        }
+
+        .wish-status {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--gold-dark);
+            min-height: 20px;
+        }
+
+        .wish-status.error {
+            color: var(--burgundy);
+        }
+
+        /* ========== SUCCESS POPUP ========== */
+        .wish-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(58, 37, 24, 0.5);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .wish-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .wish-popup {
+            background: var(--cream);
+            border: 2px solid var(--gold);
+            padding: 48px 36px;
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(58, 37, 24, 0.25);
+            transform: scale(0.8) translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .wish-popup-overlay.active .wish-popup {
+            transform: scale(1) translateY(0);
+        }
+
+        .wish-popup-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            animation: popIn 0.5s ease 0.3s both;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .wish-popup-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+
+        .wish-popup-message {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--brown-light);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .wish-popup-close {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--gold-dark);
+            border: none;
+            padding: 12px 32px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .wish-popup-close:hover {
+            background: var(--brown-dark);
+        }
+
+        .wish-popup::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid var(--gold-light);
+            pointer-events: none;
+        }
+
+        /* ========== ALBUM CAROUSEL ========== */
+        .album-section {
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .album-viewport {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .album-track {
+            display: flex;
+            align-items: center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            gap: 12px;
+            padding: 20px 0;
+        }
+
+        .album-slide {
+            flex-shrink: 0;
+            width: 72vw;
+            max-width: 360px;
+            aspect-ratio: 3/4;
+            position: relative;
+            transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.6s ease;
+            opacity: 0.45;
+            transform: scale(0.88);
+            border: 2px solid rgba(201, 168, 76, 0.3);
+            background: var(--white);
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .album-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            border-color: var(--gold);
+            box-shadow: 0 16px 48px rgba(92, 61, 46, 0.18);
+            z-index: 1;
+        }
+
+        .album-slide::before {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            border: 1px solid var(--gold-light);
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .album-slide.active::before {
+            opacity: 1;
+        }
+
+        .album-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .album-counter {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--brown-light);
+            margin-top: 20px;
+        }
+
+        .album-counter span {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        .album-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .album-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold-light);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .album-dot.active {
+            background: var(--gold-dark);
+            width: 20px;
+            border-radius: 10px;
+        }
+
+        .album-hint {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-top: 14px;
+            opacity: 0.7;
+            animation: hintPulse 2s ease-in-out 3;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+        }
+
+        .album-progress {
+            width: min(78vw, 380px);
+            height: 2px;
+            background: var(--cream-dark);
+            margin: 16px auto 0;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .album-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+            width: 0%;
+            animation: albumProgress 5s linear infinite;
+        }
+
+        @keyframes albumProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
         /* ========== FOOTER ========== */
@@ -834,11 +1044,37 @@
 
     <div class="tilet-border"></div>
 
-    <!-- ===== PHOTO ===== -->
-    <section class="photo-section fade-in">
-        <div class="photo-frame">
-            <img src="Images/First.jpg" alt="Eng. Dereje Itefa & Eng. Hawi Teshome" style="width:100%;height:100%;object-fit:cover;">
+    <!-- ===== PHOTO ALBUM ===== -->
+    <section class="album-section fade-in" id="albumSection">
+        <div class="album-viewport" id="albumViewport">
+            <div class="album-track" id="albumTrack">
+                <div class="album-slide active" data-index="0">
+                    <img src="Images/First.jpg" alt="Eng. Dereje & Eng. Hawi — Photo 1">
+                </div>
+                <div class="album-slide" data-index="1">
+                    <img src="Images/Second.jpg" alt="Eng. Dereje & Eng. Hawi — Photo 2">
+                </div>
+                <div class="album-slide" data-index="2">
+                    <img src="Images/Third.jpg" alt="Eng. Dereje & Eng. Hawi — Photo 3">
+                </div>
+                <div class="album-slide" data-index="3">
+                    <img src="Images/Fourth.jpg" alt="Eng. Dereje & Eng. Hawi — Photo 4">
+                </div>
+                <div class="album-slide" data-index="4">
+                    <img src="Images/Fifth.jpg" alt="Eng. Dereje & Eng. Hawi — Photo 5">
+                </div>
+            </div>
         </div>
+        <p class="album-counter"><span id="albumCurrent">1</span> / 5</p>
+        <div class="album-dots" id="albumDots">
+            <button class="album-dot active" data-index="0" aria-label="Photo 1"></button>
+            <button class="album-dot" data-index="1" aria-label="Photo 2"></button>
+            <button class="album-dot" data-index="2" aria-label="Photo 3"></button>
+            <button class="album-dot" data-index="3" aria-label="Photo 4"></button>
+            <button class="album-dot" data-index="4" aria-label="Photo 5"></button>
+        </div>
+        <div class="album-progress"><div class="album-progress-bar" id="albumProgressBar"></div></div>
+        <p class="album-hint" id="albumHint"></p>
     </section>
 
     <!-- ===== WEDDING DETAILS ===== -->
@@ -982,6 +1218,16 @@
         <p class="wishes-empty" id="wishesEmpty" data-i18n="wishesEmpty"></p>
     </section>
 
+    <!-- Success Popup -->
+    <div class="wish-popup-overlay" id="wishPopup">
+        <div class="wish-popup">
+            <div class="wish-popup-icon">&#10024;</div>
+            <h3 class="wish-popup-title" id="popupTitle">Thank You!</h3>
+            <p class="wish-popup-message" id="popupMessage">Your blessing has been sent to Dereje & Hawi. They will cherish your kind words.</p>
+            <button class="wish-popup-close" id="popupClose">Close</button>
+        </div>
+    </div>
+
     <div class="tilet-border"></div>
 
     <!-- ===== FOOTER ===== -->
@@ -1060,6 +1306,10 @@
                 wishSuccess: 'Thank you for your blessing!',
                 wishError: 'Something went wrong. Please try again.',
                 wishesEmpty: 'Be the first to leave a wish!',
+                popupTitle: 'Thank You!',
+                popupMessage: 'Your blessing has been sent to Dereje & Hawi. They will cherish your kind words.',
+                popupClose: 'Close',
+
                 footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
                 footerDate: 'May 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
             },
@@ -1107,6 +1357,10 @@
                 wishSuccess: 'ለምርቃትዎ እናመሰግናለን!',
                 wishError: 'ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።',
                 wishesEmpty: 'የመጀመሪያው ምኞት ይላኩ!',
+                popupTitle: 'እናመሰግናለን!',
+                popupMessage: 'ምርቃትዎ ለደረጀ እና ለሐዊ ተልኳል። የእርስዎን ደግ ቃላት ያከብራሉ።',
+                popupClose: 'ዝጋ',
+
                 footerBlessing: 'በፍቅር ተገናኝተን፣ በፍቅር እንኖራለን',
                 footerDate: 'ሚያዚያ 25, 2018 ዓ.ም. · May 3, 2026 · ጊንጪ'
             },
@@ -1154,6 +1408,10 @@
                 wishSuccess: 'Eebba keessaniif galatoomaa!',
                 wishError: 'Rakkoon uumame. Irra deebi\'aatii yaaladhaa.',
                 wishesEmpty: 'Kan jalqabaa hawwii kaa\'aa!',
+                popupTitle: 'Galatoomaa!',
+                popupMessage: 'Eebba keessan Darajjee fi Haawii\'tti ergameera. Dubbii gaarii keessan ni kabaju.',
+                popupClose: 'Cufi',
+
                 footerBlessing: 'Jaalallaan wal argine, jaalallaan waliin jiraanna',
                 footerDate: 'Caamsaa 3, 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Giincii'
             },
@@ -1201,6 +1459,10 @@
                 wishSuccess: 'Merci pour votre bénédiction!',
                 wishError: 'Une erreur est survenue. Veuillez réessayer.',
                 wishesEmpty: 'Soyez le premier à laisser un voeu!',
+                popupTitle: 'Merci!',
+                popupMessage: 'Votre bénédiction a été envoyée à Dereje & Hawi. Ils chériront vos mots aimables.',
+                popupClose: 'Fermer',
+
                 footerBlessing: 'Unis par l\'amour, nous vivrons dans l\'amour',
                 footerDate: '3 mai 2026 · ሚያዚያ 25, 2018 ዓ.ም. · Ginchi'
             }
@@ -1337,7 +1599,27 @@
         const wishesList = document.getElementById('wishesList');
         const wishesEmpty = document.getElementById('wishesEmpty');
 
-        // Submit wish — saves to Firestore (display on page) AND emails via FormSubmit
+        // Popup helpers
+        const wishPopup = document.getElementById('wishPopup');
+        const popupClose = document.getElementById('popupClose');
+
+        function showWishPopup() {
+            document.getElementById('popupTitle').textContent = T[currentLang].popupTitle;
+            document.getElementById('popupMessage').textContent = T[currentLang].popupMessage;
+            popupClose.textContent = T[currentLang].popupClose;
+            wishPopup.classList.add('active');
+        }
+
+        function hideWishPopup() {
+            wishPopup.classList.remove('active');
+        }
+
+        popupClose.addEventListener('click', hideWishPopup);
+        wishPopup.addEventListener('click', (e) => {
+            if (e.target === wishPopup) hideWishPopup();
+        });
+
+        // Submit wish — saves to Firestore AND emails both recipients in parallel
         wishForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const nameEl = document.getElementById('wishName');
@@ -1353,41 +1635,35 @@
             wishStatus.textContent = '';
             wishStatus.className = 'wish-status';
 
-            let success = false;
+            const emailPayload = JSON.stringify({
+                _subject: 'New Wedding Wish from ' + name,
+                name: name,
+                message: message,
+                _template: 'table'
+            });
+            const emailHeaders = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
 
-            // 1. Send email via FormSubmit.co
-            try {
-                await fetch('https://formsubmit.co/ajax/kenbonnurgi@gmail.com', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({
-                        _subject: 'New Wedding Wish from ' + name,
-                        name: name,
-                        message: message,
-                        _template: 'table'
-                    })
-                });
-                success = true;
-            } catch (err) {
-                console.error('Email send error:', err);
-            }
-
-            // 2. Also save to Firestore (for displaying on page)
-            try {
-                await db.collection('wishes').add({
+            // Run all three requests in parallel for speed
+            const results = await Promise.allSettled([
+                fetch('https://formsubmit.co/ajax/kenbonnurgi@gmail.com', {
+                    method: 'POST', headers: emailHeaders, body: emailPayload
+                }),
+                fetch('https://formsubmit.co/ajax/hawiteshome0@gmail.com', {
+                    method: 'POST', headers: emailHeaders, body: emailPayload
+                }),
+                db.collection('wishes').add({
                     name: name,
                     message: message,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                success = true;
-            } catch (err) {
-                console.error('Firestore error:', err);
-            }
+                })
+            ]);
+
+            const success = results.some(r => r.status === 'fulfilled');
 
             if (success) {
                 nameEl.value = '';
                 msgEl.value = '';
-                wishStatus.textContent = T[currentLang].wishSuccess;
+                showWishPopup();
             } else {
                 wishStatus.textContent = T[currentLang].wishError;
                 wishStatus.className = 'wish-status error';
@@ -1441,6 +1717,160 @@
             div.textContent = str;
             return div.innerHTML;
         }
+
+        /* ========== ALBUM CAROUSEL (infinite loop) ========== */
+        (function () {
+            const track = document.getElementById('albumTrack');
+            const realSlides = Array.from(document.querySelectorAll('.album-slide'));
+            const dots = document.querySelectorAll('.album-dot');
+            const progressBar = document.getElementById('albumProgressBar');
+            const counterEl = document.getElementById('albumCurrent');
+            const hint = document.getElementById('albumHint');
+            const viewport = document.getElementById('albumViewport');
+            const REAL_COUNT = realSlides.length;
+            let autoInterval;
+            const SLIDE_INTERVAL = 5000;
+
+            // Clone last slide before first, and first slide after last
+            // This gives us: [clone-last] [0] [1] [2] [3] [4] [clone-first]
+            const cloneLast = realSlides[REAL_COUNT - 1].cloneNode(true);
+            const cloneFirst = realSlides[0].cloneNode(true);
+            cloneLast.classList.add('clone');
+            cloneFirst.classList.add('clone');
+            cloneLast.removeAttribute('data-index');
+            cloneFirst.removeAttribute('data-index');
+            track.insertBefore(cloneLast, track.firstChild);
+            track.appendChild(cloneFirst);
+
+            const allSlides = Array.from(track.children);
+            // current is the index in allSlides; real slide 0 is at position 1
+            let pos = 1; // start on real slide 0
+
+            function getSlideWidth() {
+                return allSlides[0].offsetWidth + 12; // width + gap
+            }
+
+            function getRealIndex() {
+                return pos - 1; // maps allSlides position to 0-based real index
+            }
+
+            function moveTo(index, animate) {
+                pos = index;
+                if (animate !== false) {
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                } else {
+                    track.style.transition = 'none';
+                }
+                const slideW = getSlideWidth();
+                const viewportW = viewport.offsetWidth;
+                const offset = (viewportW - allSlides[0].offsetWidth) / 2;
+                track.style.transform = `translateX(${-(pos * slideW) + offset}px)`;
+
+                // Update visual active states
+                allSlides.forEach(s => s.classList.remove('active'));
+                allSlides[pos].classList.add('active');
+
+                // Update dots & counter based on real index
+                const real = ((pos - 1) % REAL_COUNT + REAL_COUNT) % REAL_COUNT;
+                dots.forEach((d, i) => d.classList.toggle('active', i === real));
+                counterEl.textContent = real + 1;
+
+                // Reset progress bar
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight;
+                progressBar.style.animation = `albumProgress ${SLIDE_INTERVAL / 1000}s linear infinite`;
+            }
+
+            // After transition on a clone, silently jump to the real slide
+            track.addEventListener('transitionend', () => {
+                if (pos === 0) {
+                    // We're on clone-last, jump to real last
+                    moveTo(REAL_COUNT, false);
+                } else if (pos === REAL_COUNT + 1) {
+                    // We're on clone-first, jump to real first
+                    moveTo(1, false);
+                }
+            });
+
+            function next() {
+                moveTo(pos + 1, true);
+            }
+
+            function prev() {
+                moveTo(pos - 1, true);
+            }
+
+            function goToReal(realIndex) {
+                moveTo(realIndex + 1, true);
+            }
+
+            function startAuto() {
+                autoInterval = setInterval(next, SLIDE_INTERVAL);
+            }
+
+            function resetAuto() {
+                clearInterval(autoInterval);
+                startAuto();
+            }
+
+            // Dot clicks
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    goToReal(parseInt(dot.dataset.index));
+                    resetAuto();
+                });
+            });
+
+            // Slide clicks — tap a peeking neighbor to go to it
+            allSlides.forEach((slide, i) => {
+                slide.addEventListener('click', () => {
+                    if (i !== pos) {
+                        moveTo(i, true);
+                        resetAuto();
+                    }
+                });
+            });
+
+            // Touch/swipe
+            let touchStartX = 0;
+            viewport.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            viewport.addEventListener('touchend', (e) => {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) next(); else prev();
+                    resetAuto();
+                }
+            }, { passive: true });
+
+            // Set hint text based on device — (hover: none) is true on phones/tablets
+            const isTouchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+            hint.textContent = isTouchOnly
+                ? '\u2190 swipe to browse \u2192'
+                : '\u2190 click a photo to browse \u2192';
+
+            // Hide hint after first interaction
+            let hintShown = true;
+            function hideHint() {
+                if (hintShown) {
+                    hint.style.transition = 'opacity 0.5s ease';
+                    hint.style.opacity = '0';
+                    setTimeout(() => hint.style.display = 'none', 500);
+                    hintShown = false;
+                }
+            }
+            viewport.addEventListener('touchstart', hideHint, { once: true, passive: true });
+            viewport.addEventListener('click', hideHint, { once: true });
+
+            // Recalculate on resize
+            window.addEventListener('resize', () => moveTo(pos, false));
+
+            // Start
+            moveTo(1, false);
+            startAuto();
+        })();
     </script>
 </body>
 </html>
