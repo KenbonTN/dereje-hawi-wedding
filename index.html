@@ -1727,87 +1727,89 @@
             const counterEl = document.getElementById('albumCurrent');
             const hint = document.getElementById('albumHint');
             const viewport = document.getElementById('albumViewport');
-            const REAL_COUNT = realSlides.length;
+            const N = realSlides.length;
             let autoInterval;
             const SLIDE_INTERVAL = 5000;
+            const ANIM_MS = 600;
+            let isTransitioning = false;
 
-            // Clone last slide before first, and first slide after last
-            // This gives us: [clone-last] [0] [1] [2] [3] [4] [clone-first]
-            const cloneLast = realSlides[REAL_COUNT - 1].cloneNode(true);
-            const cloneFirst = realSlides[0].cloneNode(true);
-            cloneLast.classList.add('clone');
-            cloneFirst.classList.add('clone');
-            cloneLast.removeAttribute('data-index');
-            cloneFirst.removeAttribute('data-index');
-            track.insertBefore(cloneLast, track.firstChild);
-            track.appendChild(cloneFirst);
+            // Clone 2 slides on each end for seamless peek looping
+            // Layout: [clone3] [clone4] [0] [1] [2] [3] [4] [clone0] [clone1]
+            const CLONES = 2;
+            for (let i = N - CLONES; i < N; i++) {
+                const cl = realSlides[i].cloneNode(true);
+                cl.classList.add('clone');
+                cl.removeAttribute('data-index');
+                track.insertBefore(cl, track.firstChild);
+            }
+            for (let i = 0; i < CLONES; i++) {
+                const cl = realSlides[i].cloneNode(true);
+                cl.classList.add('clone');
+                cl.removeAttribute('data-index');
+                track.appendChild(cl);
+            }
 
             const allSlides = Array.from(track.children);
-            // current is the index in allSlides; real slide 0 is at position 1
-            let pos = 1; // start on real slide 0
+            // Real slide 0 is at index CLONES in allSlides
+            let pos = CLONES; // start on real slide 0
 
-            function getSlideWidth() {
+            function slideWidth() {
                 return allSlides[0].offsetWidth + 12; // width + gap
             }
 
-            function getRealIndex() {
-                return pos - 1; // maps allSlides position to 0-based real index
+            function realIndex() {
+                return ((pos - CLONES) % N + N) % N;
             }
 
-            function moveTo(index, animate) {
+            function setPosition(index, animate) {
                 pos = index;
-                if (animate !== false) {
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                } else {
-                    track.style.transition = 'none';
-                }
-                const slideW = getSlideWidth();
-                const viewportW = viewport.offsetWidth;
-                const offset = (viewportW - allSlides[0].offsetWidth) / 2;
-                track.style.transform = `translateX(${-(pos * slideW) + offset}px)`;
+                track.style.transition = animate
+                    ? `transform ${ANIM_MS}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+                    : 'none';
+                const sw = slideWidth();
+                const vw = viewport.offsetWidth;
+                const center = (vw - allSlides[0].offsetWidth) / 2;
+                track.style.transform = `translateX(${-(pos * sw) + center}px)`;
 
-                // Update visual active states
+                // Active states
                 allSlides.forEach(s => s.classList.remove('active'));
                 allSlides[pos].classList.add('active');
 
-                // Update dots & counter based on real index
-                const real = ((pos - 1) % REAL_COUNT + REAL_COUNT) % REAL_COUNT;
-                dots.forEach((d, i) => d.classList.toggle('active', i === real));
-                counterEl.textContent = real + 1;
+                const ri = realIndex();
+                dots.forEach((d, i) => d.classList.toggle('active', i === ri));
+                counterEl.textContent = ri + 1;
 
-                // Reset progress bar
+                // Progress bar
                 progressBar.style.animation = 'none';
                 progressBar.offsetHeight;
                 progressBar.style.animation = `albumProgress ${SLIDE_INTERVAL / 1000}s linear infinite`;
             }
 
-            // After transition on a clone, silently jump to the real slide
-            track.addEventListener('transitionend', () => {
-                if (pos === 0) {
-                    // We're on clone-last, jump to real last
-                    moveTo(REAL_COUNT, false);
-                } else if (pos === REAL_COUNT + 1) {
-                    // We're on clone-first, jump to real first
-                    moveTo(1, false);
-                }
-            });
+            function animateTo(index) {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                setPosition(index, true);
 
-            function next() {
-                moveTo(pos + 1, true);
+                // After animation, check if we landed on a clone and silently reset
+                setTimeout(() => {
+                    if (pos < CLONES) {
+                        // Went past the start clones — jump to real equivalent
+                        setPosition(pos + N, false);
+                    } else if (pos >= CLONES + N) {
+                        // Went past the end clones — jump to real equivalent
+                        setPosition(pos - N, false);
+                    }
+                    isTransitioning = false;
+                }, ANIM_MS + 20);
             }
 
-            function prev() {
-                moveTo(pos - 1, true);
-            }
-
-            function goToReal(realIndex) {
-                moveTo(realIndex + 1, true);
-            }
+            function next() { animateTo(pos + 1); }
+            function prev() { animateTo(pos - 1); }
+            function goToReal(ri) { animateTo(CLONES + ri); }
 
             function startAuto() {
                 autoInterval = setInterval(next, SLIDE_INTERVAL);
             }
-
             function resetAuto() {
                 clearInterval(autoInterval);
                 startAuto();
@@ -1821,14 +1823,15 @@
                 });
             });
 
-            // Slide clicks — tap a peeking neighbor to go to it
-            allSlides.forEach((slide, i) => {
-                slide.addEventListener('click', () => {
-                    if (i !== pos) {
-                        moveTo(i, true);
-                        resetAuto();
-                    }
-                });
+            // Slide clicks — tap a peeking neighbor
+            viewport.addEventListener('click', (e) => {
+                const slide = e.target.closest('.album-slide');
+                if (!slide) return;
+                const idx = allSlides.indexOf(slide);
+                if (idx !== -1 && idx !== pos) {
+                    animateTo(idx);
+                    resetAuto();
+                }
             });
 
             // Touch/swipe
@@ -1845,7 +1848,7 @@
                 }
             }, { passive: true });
 
-            // Set hint text based on device — (hover: none) is true on phones/tablets
+            // Set hint text based on device
             const isTouchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
             hint.textContent = isTouchOnly
                 ? '\u2190 swipe to browse \u2192'
@@ -1865,10 +1868,10 @@
             viewport.addEventListener('click', hideHint, { once: true });
 
             // Recalculate on resize
-            window.addEventListener('resize', () => moveTo(pos, false));
+            window.addEventListener('resize', () => setPosition(pos, false));
 
             // Start
-            moveTo(1, false);
+            setPosition(CLONES, false);
             startAuto();
         })();
     </script>
