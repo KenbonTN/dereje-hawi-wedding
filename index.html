@@ -828,20 +828,6 @@
             display: block;
         }
 
-        .album-counter {
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            color: var(--brown-light);
-            margin-top: 20px;
-        }
-
-        .album-counter span {
-            color: var(--gold-dark);
-            font-weight: 600;
-        }
-
         .album-dots {
             display: flex;
             justify-content: center;
@@ -1107,7 +1093,6 @@
                 </div>
             </div>
         </div>
-        <p class="album-counter"><span id="albumCurrent">1</span> / 19</p>
         <div class="album-dots" id="albumDots">
             <button class="album-dot active" data-index="0" aria-label="Photo 1"></button>
             <button class="album-dot" data-index="1" aria-label="Photo 2"></button>
@@ -1780,7 +1765,6 @@
             const realSlides = Array.from(document.querySelectorAll('.album-slide'));
             const dots = document.querySelectorAll('.album-dot');
             const progressBar = document.getElementById('albumProgressBar');
-            const counterEl = document.getElementById('albumCurrent');
             const hint = document.getElementById('albumHint');
             const viewport = document.getElementById('albumViewport');
             const N = realSlides.length;
@@ -1833,7 +1817,6 @@
 
                 const ri = realIndex();
                 dots.forEach((d, i) => d.classList.toggle('active', i === ri));
-                counterEl.textContent = ri + 1;
 
                 // Progress bar
                 progressBar.style.animation = 'none';
